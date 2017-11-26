@@ -1,0 +1,110 @@
+.unfollow-user, .follow-user, .generic-button {
+  font-weight: bold;
+  font-size: 15px;
+  outline: none; }
+
+.unfollow-user {
+  background-color: #70c050;
+  border-color: #70c050;
+  padding: 4px 27px; }
+  .unfollow-user:hover {
+    background-color: #70c050;
+    border-color: #70c050; }
+  .unfollow-user:active, .unfollow-user:focus {
+    background-color: #5a9a40;
+    border-color: #5a9a40; }
+
+.follow-user, .generic-button {
+  background-color: #fff;
+  border-color: #3897f0;
+  color: #3897f0;
+  padding: 4px 38px; }
+  .follow-user:hover, .follow-user:active, .follow-user:focus, .generic-button:hover, .generic-button:active, .generic-button:focus {
+    background-color: #fff;
+    border-color: #3897f0;
+    color: #3897f0; }
+
+html {
+  height: 100%; }
+
+body {
+  min-height: 100%;
+  background-color: #fafafa; }
+  body.white {
+    background-color: #fff; }
+    body.white .content-wrapper {
+      background-color: #fff; }
+
+a:hover {
+  text-decoration: none; }
+
+.content-wrapper {
+  margin-top: 57px;
+  margin-bottom: 60px;
+  background-color: #fafafa; }
+  @media screen and (max-width: 768px) {
+    .content-wrapper {
+      margin-top: 50px; } }
+
+.picture-circle, .picture-circle--medium, .picture-circle--small {
+  border-radius: 100%;
+  width: 150px;
+  height: 150px; }
+  .picture-circle--medium {
+    width: 36px;
+    height: 36px; }
+  .picture-circle--small {
+    width: 30px;
+    height: 30px; }
+
+.picture-square {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #fff;
+  cursor: pointer; }
+  .picture-square > a {
+    cursor: pointer; }
+  .picture-square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%; }
+  .picture-square .content {
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); }
+  .picture-square:hover .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff; }
+    .picture-square:hover .content .fa {
+      color: #fff;
+      margin-right: 5px; }
+      .picture-square:hover .content .fa:not(:first-of-type) {
+        margin-left: 25px; }
+        @media screen and (max-width: 724px) {
+          .picture-square:hover .content .fa:not(:first-of-type) {
+            margin-left: 10px; } }
+
+.options-bubbles {
+  display: inline-block; }
+  .options-bubbles:hover {
+    cursor: pointer; }
+  .options-bubbles .bubble {
+    display: inline-block;
+    height: 5px;
+    width: 5px;
+    border: 1px solid #8f8f8f;
+    border-radius: 100%;
+    margin: 0; }
+
+.desktop-block {
+  display: block; }
+  @media screen and (max-width: 724px) {
+    .desktop-block {
+      display: none; } }

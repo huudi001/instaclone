@@ -1,50 +1,64 @@
+from datetime import datetime
 from django.db import models
-from django.db import models
+from django.contrib.auth.models import User, BaseUserManager, AbstractBaseUser, PermissionsMixin
+from datetime import datetime
 
-from django.db import models
-from django.contrib.auth.models import User
-from tinymce.models import HTMLField
-import datetime as dt
+class UserProfile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    followers = models.ManyToManyField('UserProfile',related_name="followers_profile",blank=True)
+    following = models.ManyToManyField('UserProfile',related_name="following_profile", blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics',null=True,blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
 
-class Comments(models.Model):
-    name = models.CharField(max_length =30)
-    comment = HTMLField()
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    comment_date = models.DateTimeField(auto_now_add=True)
+    def get_number_of_followers(self):
+        print(self.followers.count())
+        if self.followers.count():
+            return self.followers.count()
+        else:  
+            return 0
+
+    def get_number_of_following(self):
+        print(self.following.count())
+        if self.following.count():
+            return self.following.count()
+        else:
+            return 0
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
-    def delete_comments(self):
-        self.delete()
+class IGPost(models.Model):
+    user_profile = models.ForeignKey(UserProfile, null=True, blank=True)
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='posts')
+    posted_on = models.DateTimeField(default=datetime.now)
 
-    def save_comments(self):
-        self.save()
+    def get_number_of_likes(self):
+        return self.like_set.count()
 
-    def update_comments(self):
-        self.update()
-
-    @classmethod
-    def get_comments(cls):
-        all_comments= Comments.objects.all()
-
-class Upload(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    comments = models.ForeignKey(Comments)
-    uploaded_date = models.DateTimeField(auto_now_add=True)
-    upload_image = models.ImageField(upload_to='uploads/', blank=True)
-
+    def get_number_of_comments(self):
+        return self.comment_set.count()
 
     def __str__(self):
         return self.title
 
-    def delete_uploads(self):
-        self.delete()
 
-    def save_uploads(self):
-        self.save()
+class Comment(models.Model):
+    post = models.ForeignKey('IGPost')
+    user = models.ForeignKey(User)
+    comment = models.CharField(max_length=100)
+    posted_on = models.DateTimeField(default=datetime.now)
 
-    @classmethod
-    def get_uploads(cls):
-        all_uploads = Upload.objects.all()
-        return all_uploads
+    def __str__(self):
+        return self.comment
+
+
+class Like(models.Model):
+    post = models.ForeignKey('IGPost')
+    user = models.ForeignKey(User)
+
+    class Meta:
+        unique_together = ("post", "user")
+
+    def __str__(self):
+        return 'Like: ' + self.user.username + ' ' + self.post.title
