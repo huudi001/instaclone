@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.db import models
-from django.contrib.auth.models import User, BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import User
 from datetime import datetime
 
 class UserProfile(models.Model):
@@ -14,7 +14,7 @@ class UserProfile(models.Model):
         print(self.followers.count())
         if self.followers.count():
             return self.followers.count()
-        else:  
+        else:
             return 0
 
     def get_number_of_following(self):
