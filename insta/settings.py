@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'instaclone.apps.InstacloneConfig',
+    'gram.apps.GramConfig',
     'bootstrap3',
     'tinymce',
 ]
@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'insta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta',
+        'NAME': 'gram',
         'USER': 'khalid',
     'PASSWORD':'pythonista50',
     }
