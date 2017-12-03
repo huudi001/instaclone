@@ -1,0 +1,62 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+
+    <!-- Styles block -->
+    {% block styles %}
+
+        {% bootstrap_css %}
+
+
+
+    {% endblock %}
+</head>
+<body>
+    {% if user.is_authenticated %}
+
+        <nav class="navbar navbar-inverse">
+
+
+            <div class="container-fluid">
+
+                <div class="container">
+
+                    <div class="navbar-header">
+
+                        <a href="{% url 'timeline'%}" class="navbar-brand" >
+
+                        </a>
+
+                        <a href="{% url 'timeline'%}" class="navbar-brand siteName">INSTA CLONE</a>
+
+                    </div>
+
+                    <div class="navbar-right">
+
+                        <a href="{%url 'explore' user.id%}">Explore
+
+                        </a>
+
+                        <a href="{% url 'profile' user.id%}" >User</a>
+
+                        <a href="/logout">Logout</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+
+    {% endif %}
+
+
+</body>
+</html>
